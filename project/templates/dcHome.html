@@ -1,0 +1,66 @@
+{%extends "CustomerDashboard.html"%}
+{%block content%}
+<div class="card">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card-body">
+                <h5 class="card-title">User Details</h5>
+            </div>
+            <table class="list-group list-group-flush">
+                <tr class="list-group-item">
+                    <td>First Name:</td>
+                    <td>{{request.user.first_name}}</td>
+                </tr>
+                <tr class="list-group-item">
+                    <td>User Type:</td>
+                    <td>{{request.user.user_type}}</td>
+                </tr>
+                <tr class="list-group-item">
+                    <td>Email:</td>
+                    <td>{{request.user.email}}</td>
+                </tr>
+                <tr class="list-group-item">
+                    <td>Name:</td>
+                    <td>{{request.user.mobile}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <br>
+            <center>
+                <img class="card-img-top" src="{{request.user.user_profile.photo.url}}" style="width: 200px; height: 200px; border-radius: 50%;" alt="Card image cap"><br><br>
+                <a data-target="#profilePic" data-toggle="modal" class="btn btn-outline-info">Change Profile Picture</a>&nbsp;
+                <a class="btn btn-outline-danger" href="/changePassword">Change Password</a>
+            </center>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="profilePic" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Profile Picture</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/changeProfilePic" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                    {%csrf_token%}
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="name">Profile Picture</label>
+                                <input type="file" name="pic" id="name" required class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Change Picture</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

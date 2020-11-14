@@ -1,0 +1,298 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoHelp</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-2">
+            <center><img class="logo" src="{% static 'images/logo.png' %}" width="250px" height="150px" alt="Logo"></center>
+        </div>
+        <div class="col-sm-8">
+            <p class="introHead">Go Help<br>A Customer Worker Interaction Platform</p>
+        </div>
+        <div class="col-sm-2 lsb">
+            <center>
+                {%if request.user.is_authenticated == False%}
+                <a data-target="#login" data-toggle="modal" class="btn btn-outline-primary">Login</a>&nbsp;
+                <a href="/register" class="btn btn-outline-info">Register</a>
+                {%else%}
+                  {%if request.user.user_type == "Worker"%}
+                  <a href="/worker/home" class="btn btn-outline-primary">Dashboard</a>&nbsp;
+                  {%elif request.user.user_type == "Customer"%}
+                  <a href="/customer/home" class="btn btn-outline-primary">Dashboard</a>&nbsp;
+                  {%endif%}
+                  <a href="/logout" class="btn btn-outline-info">Logout</a>
+                {%endif%}
+            </center>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light text">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto col">
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-secondary material-design nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-info nav-link" href="#about">About Us</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-success nav-link" href="#mision">Mision and Vision</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-secondary nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-info nav-link" href="#testimonials">Testimonials</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-success nav-link" href="#contact">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+    </nav><br>
+        <div class="alert alert-info">   
+    <marquee behavior="" direction="">    
+            <p>
+                {%for item in announcement%}
+                {{item.message}}&nbsp;&nbsp;{% if item.link_exist == True %} Link: <a href="{{item.link}}">Click Here</a>{% endif %} &nbsp;&nbsp;
+                {%endfor%}  
+            </p>
+    </marquee>
+    </div>
+    <div class="container-fluid">
+        {% if messages %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+          <div class="alert alert-success" role="alert">
+            {{message}} 
+          </div>
+        </div>
+        {% endfor %}
+      {%endif%}
+    </div>
+    <div class="parallax"></div>
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <br><br><p class="homeText">About Us</p>
+                    <p class="aboutText">&emsp;&emsp;GoHelp is a Customer Worker interaction platform. This platform enables the new working style of the workers invoking a direct communication between the worker and the customers.<br><br>&emsp;&emsp;We eliminate the involvement of other stake holders like contractors, mediators, brokers..., We ensure the worker recieves the correct wage he needs to be paid for.</p>
+                </div>
+                <div class="col-sm-4">
+                    <center><img src="{% static 'images/about_image.jpg' %}" class="aboutImage" alt=""></center>
+                </div>
+            </div> 
+        </div><br>
+    </section>
+    <div class="parallax2"></div>
+    <section id="mision">
+        <div class="container">
+            <br><br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <center><img src="{% static 'images/mision.png' %}" alt="Mision"></center>
+                    <p class="aboutText">&emsp;&emsp;To Develop a substainable environment where worker and customer can actively work. Eliminating the use of third party brokers in contracts, ensuring the money to reach directly to the workers</p>
+                </div>
+                <div class="col-sm-6">
+                    <center><img src="{% static 'images/vision.png' %}" alt="Vision"></center>
+                    <p class="aboutText">&emsp;&emsp;To enable the best-in-class service offered to the customers keeping the supply chain demand constantly.</p>
+                </div>
+            </div>
+        </div><br>
+    </section>
+    <div class="parallax3"></div>
+    <section id="services">
+      <div class="container">
+        <br><br><p class="homeText">Services Offered</p>
+        <div class="card-deck">
+          <div class="card">
+            <img class="card-img-top" src="{% static 'images/house_keeping.jpg' %}" style="width: 200px; height: 200px;" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">House Keeping</h5>
+              <p class="card-text">Enables an ambient house atmosphere</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Gardener</li>
+              <li class="list-group-item">Clothes Washer</li>
+              <li class="list-group-item">Bathroom Cleaner</li>
+              <li class="list-group-item">Iron worker</li>
+            </ul>
+          </div>
+          <div class="card">
+            <img class="card-img-top" src="{% static 'images/repair_man.jpg' %}" style="width: 200px; height: 200px;" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">House Repair</h5>
+              <p class="card-text">Give a fresh look to the old</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Electricity</li>
+              <li class="list-group-item">Water</li>
+              <li class="list-group-item">Carpenter</li>
+              <li class="list-group-item">Cement Work</li>
+            </ul>
+          </div>
+          <div class="card">
+            <img class="card-img-top" src="{% static 'images/sanitation.jpg' %}" style="width: 200px; height: 200px;" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Sanitary Works</h5>
+              <p class="card-text">Fresh Environment creates Active Mind</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Drinage Work</li>
+              <li class="list-group-item">Septic Tank Cleaning</li>
+              <li class="list-group-item">CoViD 19 Sanitising</li>
+              <li class="list-group-item">Cleaning</li>
+            </ul>
+          </div>
+        </div>
+      </div><br>
+    </section>
+    <div class="parallax4"></div>
+    <section id="testimonials">
+      <div class="container">
+        <br><br><p class="homeText">Testimonials</p>
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Excellent Service</h5>
+              <div class="row">
+                <div class="col">
+                  <img src="{% static 'images/user1.png' %}" alt="">
+                  <div class="card-body">
+                    <p class="card-text">Rating: &#9733;&#9733;&#9733;&#9733;&#9733;<br>Appointment Date:<br>04-11-2020
+                    </p>
+                  </div>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li class="list-group-item">Resonable Price</li>
+                    <li class="list-group-item">Best Service</li>
+                    <li class="list-group-item">High Quality Tools</li>
+                    <li class="list-group-item">Best Skilled Worker</li>
+                  </ul>
+                </div>
+              </div>  
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">High Skilled Worker at reasonable wage</h5>
+              <div class="row">
+                <div class="col">
+                  <img src="{% static 'images/user1.png' %}" alt="">
+                  <div class="card-body">
+                    <p class="card-text">Rating: &#9733;&#9733;&#9733;&#9733;<br>Appointment Date:<br>10-10-2020
+                    </p>
+                  </div>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li class="list-group-item">High Quality Tools</li>
+                    <li class="list-group-item">Resonable Price</li>
+                    <li class="list-group-item">Best Skilled Worker</li>
+                    <li class="list-group-item">Best Service</li>
+                  </ul>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div><br>
+    </section>
+    <div class="parallax5"></div>
+    <section id="contact">
+      <div class="container">
+        <br><br><p class="homeText">Contact Us</p>
+        <form action="/contact" method="POST" enctype="multipart/form-data">
+          {%csrf_token%}
+          <div class="row">
+            <div class="col-sm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="cust_name" id="name" class="form-control" required>
+              </div>    
+            </div>
+            <div class="col-sm">
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" name="cust_email" id="email" class="form-control" required>
+              </div>    
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div class="form-group">
+                <label for="mobile">Mobile</label>
+                <input type="text" name="cust_mobile" id="mobile" class="form-control" required>
+                <small>Enter your 10 digit mobile number</small>
+              </div>    
+            </div>
+            <div class="col-sm">
+              <div class="form-group">
+                <label for="issue">Message</label>
+                <textarea name="cust_message" id="issue" class="form-control" required></textarea>
+              </div>    
+            </div>
+          </div>
+          <input type="submit" value="Send Message" class="btn btn-primary">
+        </form>
+      </div>
+    </section>
+    <div class="footer text">
+        GoHelp Services Pvt. Ltd. Image credits to freepik services
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">GoHelp User Management</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <center><img class="logo" src="{% static 'images/logo.png' %}" width="250px" height="150px" alt="Logo"></center>
+            </div>
+          <form action="/login" method="POST">
+            <div class="modal-body">
+                {%csrf_token%}
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                      <label for="name">UserName</label>
+                      <input type="text" name="username" id="name" required class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="form-group">
+                      <label for="upassword">Password</label>
+                      <input type="password" name="password" id="upassword" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <p style="text-align: right;"><a href="/changePassword" class="btn btn-link">Forgot Password</a></p>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

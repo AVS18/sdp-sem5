@@ -1,0 +1,21 @@
+{%extends "AdminDashboard.html"%}
+{%block content%}
+<div class="container"><br><br>
+    <form action="" method="POST">
+        {%csrf_token%}
+        <div class="form-group">
+            <label for="to">Email</label>
+            <input type="email" name="to_email" id="to" class="form-control" required> 
+        </div>
+        <div class="form-group">
+            <label for="body">Head</label>
+            <input type="text" name="body" id="body" class="form-control" required> 
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea rows="10" type="text" name="message" id="message" class="form-control" required></textarea>
+        </div>
+        <input type="submit" class="btn btn-outline-primary" value="Send Email">
+    </form>            
+</div>
+{%endblock%}

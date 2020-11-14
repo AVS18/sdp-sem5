@@ -1,0 +1,20 @@
+{%extends "CustomerDashboard.html"%}
+{%block content%}
+<form action="/customer/talk/{{rid}}" method="POST">
+    {%csrf_token%}
+    <div class="alert alert-outline-info">
+        {%for item in obj%}
+            <b>{{item.sent_by.username}}</b>&emsp;{{item.time}}<br>
+            <p>{{item.message}}</p>
+        {%endfor%} 
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="message" placeholder="Enter your Message..." required>
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" value="Send Message" class="btn btn-primary">
+        </div>
+    </div>
+</form>
+{%endblock%}

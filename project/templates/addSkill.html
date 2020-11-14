@@ -1,0 +1,56 @@
+{%extends "workerDashboard.html"%}
+{%block content%}
+<form action="/worker/addSkill" method="POST">
+    {%csrf_token%}
+    <p style="color:red">All Fields are mandatory. Provide Experience and Charges in Integers</p>
+    <p class="homeText"><b>Primary Skill</b></p>
+    <hr width="100%">
+    <div class="row">
+        <div class="col-sm form-group">
+            <label for="primary_skill">Primary Skill Name</label>
+            <input type="text" name="primary_skill" id="primary_skill" class="form-control" required value="{{obj.primary_skill}}">
+        </div>
+        <div class="col-sm form-group">
+            <label for="primary_exp">Primary Skill Experience</label>
+            <input type="text" name="primary_exp" id="primary_exp" class="form-control" required value="{{obj.primary_exp}}">
+        </div>
+        <div class="col-sm form-group">
+            <label for="primary_rate">Charges Collected (per hour)</label>
+            <input type="text" name="primary_rate" id="primary_rate" class="form-control" required value="{{obj.primary_rate}}">
+        </div>
+    </div>
+    <p class="homeText"><b>Secondary Skill</b></p>
+    <hr width="100%">
+    <div class="row">
+        <div class="col-sm form-group">
+            <label for="secondary_skill">Secondary Skill Name</label>
+            <input type="text" name="secondary_skill" id="secondary_skill" class="form-control" required value="{{obj.secondary_skill}}">
+        </div>
+        <div class="col-sm form-group">
+            <label for="secondary_exp">Secondary Skill Experience</label>
+            <input type="text" name="secondary_exp" id="secondary_exp" class="form-control" required value="{{obj.secondary_exp}}">
+        </div>
+        <div class="col-sm form-group">
+            <label for="secondary_rate">Charges Collected (per hour)</label>
+            <input type="text" name="secondary_rate" id="secondary_rate" class="form-control" required value="{{obj.secondary_rate}}">
+        </div>
+    </div>
+    <p class="homeText"><b>Additional Skill</b></p>
+    <hr width="100%">
+    <div class="row">
+        <div class="col-sm form-group">
+            <label for="additional_skill">Additional Skill Name</label>
+            <input type="text" name="additional_skill" id="additional_skill" class="form-control" required value="{{obj.additional_skill}}">
+        </div>
+        <div class="col-sm form-group">
+            <label for="additional_exp">Additional Skill Experience</label>
+            <input type="text" name="additional_exp" id="additional_exp" class="form-control" required value="{{obj.additional_exp}}">
+        </div>
+        <div class="col-sm form-group">
+            <label for="additional_rate">Charges Collected (per hour)</label>
+            <input type="text" name="additional_rate" id="additional_rate" class="form-control" required value="{{obj.additional_rate}}">
+        </div>
+    </div>
+    <input type="submit" value="Add Skill Profile" class="btn btn-outline-secondary">
+</form>
+{%endblock%}

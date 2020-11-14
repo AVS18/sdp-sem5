@@ -1,0 +1,123 @@
+.mainImg {
+    width: 100%;
+}
+@media screen and (max-width: 700px) {
+    .mainImg{
+        height: 200px;
+    }
+}
+.aboutText {
+    font-family: Georgia, 'Times New Roman', Times, serif;	
+    font-weight: 200;
+    line-height: 2em;
+    font-size: larger;
+    letter-spacing: 1.3px;
+    text-align: justify;
+    color: #000080;
+}
+.main {
+    font-weight: 400;
+    font-size: large;
+}
+.navbar-nav a{
+    font-size: larger;
+    font-stretch: expanded;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 3px;
+  }
+  .navbar-nav a:hover{
+    color: white !important;
+    border-radius: 5px;
+  }
+  
+.homeText {
+    font-size: x-large;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-style: oblique;
+}
+.parallax{
+    background-image: url('../images/main_1.png');
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax2{
+    background-image: url('../images/worker_2.jpg');
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax3{
+    background-image: url('../images/worker_3.jpg');
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax4{
+    background-image: url('../images/worker_5.jpg');
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax5 {
+    background-image: url('../images/worker_4.jpg');
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.footer{
+    text-align: center;
+}
+.introHead{
+    text-align: center;
+    font-size: xx-large;
+    font-style: oblique;
+    padding: 5px;
+    font-family: 'Gill Sans', sans-serif;
+    color: #000080;
+}
+.mytext{
+    text-align: center;
+    font-size: x-large;
+    font-style: oblique;
+    padding: 5px;
+    font-family: 'Gill Sans', sans-serif;
+    color: #000080;
+}
+
+@media screen and (max-width: 700px){
+    .introHead{
+        display: none;
+    }
+    .logo{
+        align-content: center;
+    }
+}
+.lsb{
+    text-align: center;
+    padding-top: 5%;
+}
+.aboutImage {
+    width: 500px;
+    height: auto;
+}
+.footer {
+    font-weight: 400;
+    font-size: 1.3em;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #002366;
+    text-align: center;
+}

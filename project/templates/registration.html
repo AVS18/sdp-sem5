@@ -1,0 +1,249 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoHelp</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-2">
+            <center><img class="logo" src="{% static 'images/logo.png' %}" width="250px" height="150px" alt="Logo"></center>
+        </div>
+        <div class="col-sm-8">
+            <p class="introHead">Go Help<br>A Customer Worker Interaction Platform</p>
+        </div>
+        <div class="col-sm-2 lsb">
+            <center>
+                <a href="#" class="btn btn-outline-primary">Login</a>
+            </center>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light text">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto col">
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-secondary material-design nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-info nav-link" href="#about">About Us</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-success nav-link" href="#mision">Mision and Vision</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-secondary nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-info nav-link" href="#testimonials">Testimonials</a>
+            </li>
+            <li class="nav-item active col-sm-2">
+                <a class="btn-outline-success nav-link" href="#contact">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+    </nav><br>
+        <div class="alert alert-info">   
+    <marquee behavior="" direction="">    
+            <p>
+                {%for item in announcement%}
+                {{item.message}}&nbsp;&nbsp;{% if item.link_exist == True %} Link: <a href="{{item.link}}">Click Here</a>{% endif %} &nbsp;&nbsp;
+                {%endfor%}  
+            </p>
+    </marquee>
+    </div>
+    <div class="container-fluid">
+        {% if messages %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+          <div class="alert alert-success" role="alert">
+            {{message}} 
+          </div>
+        </div>
+        {% endfor %}
+      {%endif%}
+    </div>
+    <div class="row">
+        <div class="container">
+            <p class="mytext">Join Our Team</p>
+            <p style="color:red">*All Fields is Mandatory</p>
+            <form action="/register" method="POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <p class="homeText">Basic Information</p>
+                    <div class="row"> 
+                        <div class="col-sm-6 form-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" id="fname" name="first_name" class="form-control" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" id="lname" name="last_name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-sm-6 form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" class="form-control" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" name="date_of_birth" class="form-control" min="1985-01-01" max="2003-12-31" required>
+                        </div>
+                    </div>
+                    <p class="homeText">Address</p>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="al1">Address Lane 1</label>
+                            <input type="text" id="al1" name="address_lane_1" class="form-control" required>
+                            <caption>Enter your Door Number, Flat Name</caption>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="al2">Address Lane 2</label>
+                            <input type="text" id="al2" name="address_lane_2" class="form-control" required>
+                            <caption>Enter Appartment Name and Street Name / Colony</caption>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-sm-6 form-group">
+                            <label for="landmark">Landmark</label>
+                            <input type="text" id="lname" name="landmark" class="form-control" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="place">City</label>
+                            <input type="text" id="place" name="city" class="form-control" required>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="state">State</label>
+                            <select id="state" name="state" class="form-control" required>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option></option>
+                                <option value="Arunachal Pradesh ">Arunachal Pradesh </option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir ">Jammu and Kashmir </option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                <option value="Daman and Diu">Daman and Diu</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="National Capital Territory of Delhi">National Capital Territory of Delhi</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="pin">Pin Code</label>
+                            <input type="text" id="pin" name="pincode" class="form-control" required>
+                        </div>
+                    </div>
+                    <p class="homeText">Contact Information</p>
+                    <div class="row"> 
+                        <div class="col-sm-6 form-group">
+                            <label for="por">Proof of Residence</label>
+                            <input type="file" id="por" name="proof_of_residence" class="form-control" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="phone">Mobile Number</label>
+                            <input type="text" id="phone" name="mobile" class="form-control" required>
+                            <caption>Enter 10 digit mobile number</caption>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="alt_phone">Alternate Mobile Number</label>
+                            <input type="text" id="alt_phone" name="alt_mobile" class="form-control" required>
+                        </div>
+                    </div>
+                    <p class="homeText">Login Information</p>
+                    <div class="row"> 
+                        <div class="col-sm-6 form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input type="password" id="confirm_password" name="cnf_password" class="form-control" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="pp">Profile Photo</label>
+                            <input type="file" id="pp" name="profile_pic" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="acc_type">Account Type</label>
+                            <select name="user_type" class="form-control" id="acc_type">
+                                <option value="Worker">Worker</option>
+                                <option value="Customer">Customer</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="toc">Terms and Conditions</label>
+                            <p id="customer" class="form-control">Terms and Conditions <a href="#" >Click Here</a></p>
+                        </div>
+                    </div>
+                    <p class="homeText">Non Disclosure Agreement</p>
+                    <p><input onclick="checkbox()" type="checkbox" value="I Agree" id="check">&nbsp;I agree to All the Terms and Conditions mentioned above and any voilation of them leads to rejection of the application</p>
+                    <input type="submit" value="Register" class="btn btn-outline-success" id="button" disabled>
+
+            </form>
+        </div>
+    </div>
+    <script>
+        function checkbox()
+        {
+            var check = document.getElementById('check');
+            var button = document.getElementById('button')
+            if(check.checked)
+            button.disabled=false;
+            else
+            button.disabled=true;
+        }
+    </script>
+</body>
+</html>

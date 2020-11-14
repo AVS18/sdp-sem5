@@ -1,0 +1,53 @@
+{%extends "workerDashboard.html"%}
+{%block content%}
+<br><br>
+<form action="/worker/feedback" method="POST">
+    {%csrf_token%}
+    <div class="row form-group">
+        <div class="col-sm">
+            <label for="appointment">Customer Name</label>
+            <select name="appointment_id" id="appointment" class="form-control">
+                {%for item in app_obj%}
+                <option value="{{item.id}}">{{item.customer.first_name}},{{item.work_name}} </option>
+                {%endfor%}
+            </select>
+        </div>
+        <div class="col-sm">
+            <label for="behaviour">Behaviour</label>
+            <select name="behaviour" id="behaviour" class="form-control">
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Bad">Bad</option>
+            </select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm">
+            <label for="support">Support</label>
+            <select name="support" id="support" class="form-control">
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Bad">Bad</option>
+            </select>
+        </div>
+        <div class="col-sm">
+            <label for="response">Response</label>
+            <select name="response" id="response" class="form-control">
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Bad">Bad</option>
+            </select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm">
+            <label for="rating">Rating</label>
+            <input type="range" min="1" max="5" class="form-control" id="rating" name="rating">
+        </div>
+        <div class="col-sm">
+            <br>
+            <input type="submit" value="Submit Feedback" class="btn btn-outline-primary">        
+        </div>
+    </div>
+</form>
+{%endblock%}

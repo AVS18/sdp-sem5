@@ -1,0 +1,33 @@
+{%extends "CustomerDashboard.html"%}
+{%block content%}
+<br><br>
+<form action="/contactSupport" method="POST" enctype="multipart/form-data">
+    {%csrf_token%}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm form-group">
+                <label for="user1">Worker</label>
+                <select name="user_id" id="user1" class="form-control">
+                    {%for item in obj%}
+                    <option value="{{item.id}}">{{item.first_name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="col-sm">
+                <label for="issue">Issue</label>
+                <input type="text" name="issue" class="form-control" id="issue" required>
+            </div>
+        </div>
+        <div class="row">
+            <label for="describe">Description</label>
+            <textarea name="description" class="form-control" id="describe" cols="30" rows="5" required></textarea>
+            <small>2048 Characters Maximum</small>
+        </div>
+        <div class="row">
+            <label for="proof">Attach Proof</label>
+            <input type="file" class="form-control" name="proof" id="proof" required>
+        </div>
+        <input type="submit" value="Report User" class="btn btn-outline-danger">
+    </div>
+</form>
+{%endblock%}

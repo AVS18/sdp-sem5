@@ -1,0 +1,123 @@
+{%extends "CustomerDashboard.html"%}
+{%block content%}
+<form action="/customer/filter" method="POST">
+  {%csrf_token%}
+  <p class="homeText"><b>Filter</b></p>
+  <div class="row">
+    <div class="col-sm-3 form-group">
+      <label for="skill_name">Skill Name</label>
+      <select name="skill_name" id="skill_name" class="form-control">
+        {% for item in work_name %}
+        <option value="{{item}}">{{item}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <div class="col-sm-3 form-group">
+      <label for="wage">Salary</label>
+      <select name="wage" class="form-control" id="wage">
+        <option value="0 100">$0-$100</option>
+        <option value="100 200">$100-$200</option>
+        <option value="200 300">$200-$300</option>
+        <option value="above">above 300</option>
+      </select>
+    </div>
+    <div class="col-sm-3 form-group">
+      <label for="rating">Rating</label>
+      <select name="rating" class="form-control" id="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <br>
+      <input type="submit" value="Filter" class="btn btn-primary">
+    </div>
+  </div>
+</form>
+<div class="container">
+    <p class="homeText"><b>Primary Skill Workers</b></p>
+        <div class="row">
+          {% for item in primary %}
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h5 class="card-title">{{item.primary_skill}}</h5>
+                      <p class="card-text">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Experience {{item.primary_exp}} years</li>
+                          <li class="list-group-item">Wages ${{item.primary_rate}} per hour</li>
+                          <li class="list-group-item">Rating {{item.rating}}</li>
+                        </ul>
+                      </p>
+                      <a href="/customer/startChat/{{request.user.id}}/{{item.user.id}}" class="btn btn-outline-info">Contact Worker</a>
+                  </div>
+                  <div class="col-sm-4">
+                    <img src="{{item.user.user_profile.photo.url}}" style="border-radius: 50%;" width="100px" height="100px" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>            
+          </div>        
+          {%endfor%}
+        </div><br>
+    <p class="homeText"><b>Secondary Skill Workers</b></p>
+    <div class="row">
+      {% for item in secondary %}
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-8">
+                <h5 class="card-title">{{item.secondary_skill}}</h5>
+                  <p class="card-text">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Experience {{item.secondary_exp}} years</li>
+                      <li class="list-group-item">Wages ${{item.secondary_rate}} per hour</li>
+                      <li class="list-group-item">Rating {{item.rating}}</li>
+                    </ul>
+                  </p>
+                  <a href="/customer/startChat/{{request.user.id}}/{{item.user.id}}" class="btn btn-outline-info">Contact Worker</a>
+              </div>
+              <div class="col-sm-4">
+                <img src="{{item.user.user_profile.photo.url}}" style="border-radius: 50%;" width="100px" height="100px" alt="Image">
+              </div>
+            </div>
+          </div>
+        </div>            
+      </div>        
+      {%endfor%}
+    </div><br>
+    <p class="homeText"><b>Additional Skill Workers</b></p>
+    <div class="row">
+      {% for item in additional %}
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-8">
+                <h5 class="card-title">{{item.additional_skill}}</h5>
+                  <p class="card-text">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Experience {{item.additional_exp}} years</li>
+                      <li class="list-group-item">Wages ${{item.additional_rate}} per hour</li>
+                      <li class="list-group-item">Rating {{item.rating}}</li>
+                    </ul>
+                  </p>
+                  <a href="/customer/startChat/{{request.user.id}}/{{item.user.id}}" class="btn btn-outline-info">Contact Worker</a>
+              </div>
+              <div class="col-sm-4">
+                <img src="{{item.user.user_profile.photo.url}}" style="border-radius: 50%;" width="100px" height="100px" alt="Image">
+              </div>
+            </div>
+          </div>
+        </div>            
+      </div>        
+      {%endfor%}
+    </div>
+</div>
+{%endblock%}

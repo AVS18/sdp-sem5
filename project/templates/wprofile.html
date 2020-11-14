@@ -1,0 +1,113 @@
+{%extends "workerDashboard.html"%}
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-sm form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{request.user.first_name}}" readonly>
+        </div>
+        <div class="col-sm form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{request.user.last_name}}" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{request.user.mobile}}" readonly>
+        </div>
+        <div class="col-sm form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{request.user.username}}" readonly>
+        </div>
+    </div>
+</div>
+<hr width="100%">
+<form action="/profile" method="POST" enctype="multipart/form-data">
+    {%csrf_token%}
+    <p class="homeText">Address</p>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="al1">Address Lane 1</label>
+                            <input type="text" value="{{request.user.user_profile.address_lane_1}}" id="al1" name="address_lane_1" class="form-control" required>
+                            <caption>Enter your Door Number, Flat Name</caption>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="al2">Address Lane 2</label>
+                            <input type="text" id="al2" name="address_lane_2" class="form-control" value="{{request.user.user_profile.address_lane_2}}" required>
+                            <caption>Enter Appartment Name and Street Name / Colony</caption>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-sm-6 form-group">
+                            <label for="landmark">Landmark</label>
+                            <input type="text" id="lname" name="landmark" class="form-control" value="{{request.user.user_profile.landmark}}" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="place">City</label>
+                            <input type="text" id="place" name="city" class="form-control" value="{{request.user.user_profile.city}}" required>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="state">State</label>
+                            <select id="state" name="state" class="form-control" required value="{{request.user.user_profile.state}}">
+                                <option value="Andhra Pradesh">Andhra Pradesh</option></option>
+                                <option value="Arunachal Pradesh ">Arunachal Pradesh </option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir ">Jammu and Kashmir </option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                <option value="Daman and Diu">Daman and Diu</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="National Capital Territory of Delhi">National Capital Territory of Delhi</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="pin">Pin Code</label>
+                            <input type="text" id="pin" name="pincode" class="form-control" required value="{{request.user.user_profile.pincode}}">
+                        </div>
+                    </div>
+                    <p class="homeText">Contact Information</p>
+                    <div class="row"> 
+                        <div class="col-sm-6 form-group">
+                            <label for="por">Proof of Residence</label>
+                            <input type="file" id="por" name="proof_of_residence" class="form-control" required>
+                            <small><a href="{{request.user.user_profile.proof_of_residence.url}}">Click here</a> to view old proof</small>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="alt_phone">Alternate Mobile Number</label>
+                            <input type="text" id="alt_phone" name="alt_mobile" class="form-control" value="{{request.user.user_profile.alternate_phone}}" required>
+                        </div>
+                    </div>
+        <input type="submit" value="Update Profile" class="btn btn-outline-success">
+</form>
+{%endblock%}
